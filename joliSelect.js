@@ -65,7 +65,7 @@
 			html += '<ul id="combo'+nom_base+'">';			
            
 		    joli_txt[nom_base] = parametres.defaultText;
-			joli_val[nom_base]   = 0;
+			joli_val[nom_base]   = -1;
             element.find('option').each(function(i) //Puis on parcourt chaque item !
             {	
               var classe_selected='';  			
