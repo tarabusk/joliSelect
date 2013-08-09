@@ -1,4 +1,6 @@
-
+.joliSelect{
+display:inline-block;
+}
 .item_sel{
 font-weight:bold !important;
 }     
@@ -10,18 +12,32 @@ vertical-align: top;
 position:absolute;
 
 }
+.joliSelect li{
+transition: background-color 0.4s;
+  -moz-transition: background-color 0.4s; /* Firefox 4 */
+  -webkit-transition: background-color 0.4s; /* Safari and Chrome */
+  -o-transition: background-color 0.4s; /* Opera */
+}
+.joliSelect li:hover{
+transition: background-color 0.1s;
+  -moz-transition: background-color 0.1s; /* Firefox 4 */
+  -webkit-transition: background-color 0.1s; /* Safari and Chrome */
+  -o-transition: background-color 0.1s; /* Opera */
+}
 .joli_txt{
 cursor:pointer;
-padding:2px;
-border-radius: 2px; 
--moz-border-radius: 2px; 
--webkit-border-radius: 2px;
+border-radius: 4px; 
+-moz-border-radius: 4px; 
+-webkit-border-radius: 4px;
+margin:0!important;
+padding:2px 15px 2px 2px!important;
 
 }
 .joli_txt:hover{
 box-shadow: 1px 1px 2px 1px #d7d7d7 ;
  -moz-box-shadow:1px 1px 2px 1px #d7d7d7 ;
  -webkit-box-shadow:1px 1px 2px 1px #d7d7d7 ;
+ 
 }
 input {
 font:inherit;
@@ -29,7 +45,7 @@ font:inherit;
 /* Layout helpers
 ----------------------------------*/
 .ui-helper-hidden {
-  display: none;
+	display: none;
 }
 .ui-helper-hidden-accessible {
 	border: 0;
