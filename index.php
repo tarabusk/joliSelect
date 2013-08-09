@@ -21,20 +21,20 @@
 	  }
 	?>
 	<body>   		
-		  <form method="POST" action="">
-		    <input type="text" name="texte" value="Au jardin" />
-			<br/>
+		  <form method="POST" action="">	
+		    <input type="text" id="texte" name="texte" value="Au jardin" />
+			<br/>		
 			<select id="combo_fruit" >
-			  <option value="1" >Orange</option>
-			  <option value="2" selected="selected">Banane</option>
-			  <option value="3">Pomme</option>
-			  <option value="4">Poire</option>
-			  <option value="5">Kiwi</option>
-			  <option value="6">Fraise</option>
-			  <option value="7">Ananas</option>
-			  <option value="8">Mangue</option>
-			  <option value="9">Framboise</option>
-			  <option value="10">L'éléphant rose à pois verts se lance dans l'étang gris</option>
+			  <option value="1" >Orange**++Orange++</option>
+			  <option value="2" selected="selected">Banane**++Banane++</option>
+			  <option value="3">Pomme**++Pomme++</option>
+			  <option value="4">Poire**++Poire++</option>
+			  <option value="5">Kiwi**++Kiwi++</option>
+			  <option value="6">Fraise**++Fraise++</option>
+			  <option value="7">Ananas**++Ananas++</option>
+			  <option value="8">Mangue**++Mangue++</option>
+			  <option value="9">Framboise**++Framboise++</option>
+			  <option value="10">L'éléphant rose à pois verts se lance dans l'étang gris**++Eléphant++</option>
 			</select>
 			<br/>
 			<select id="combo_legume" >
@@ -58,7 +58,6 @@
 			<br/>
 			<input type="submit" value="Valider">
 		  </form>
-
 		
 	</body>
 </html>
@@ -74,6 +73,7 @@
     'width'          : '160',
 	'bkdColor'       : '#caec7c',
 	'bkdColorSelect' : '#b3e251',
+	'arrowColor'     : '#b3e251',
 	'fontColor'      : '#4e6d16',
 	'maxHeight'      : '200',
 	'defaultText'    : 'Choisir un légume'
@@ -84,9 +84,9 @@
     'width'          : '200',
 	'bkdColor'       : '#e0c1c1',
 	'bkdColorSelect' : '#e09188',
+	'arrowColor'     : '#e09188',
 	'fontColor'      : '#914f53',
 	'maxHeight'      : '200'
    });
   })
 </script>
-  
