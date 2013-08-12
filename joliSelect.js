@@ -86,7 +86,8 @@
 			    var txtShow = tabTxt[0];
 			 
               var classe_selected='';  			
-			  if ($(this).prop('selected')){			     
+			  if ($(this).is(":selected")&& (element.prop("selectedIndex")!=0)){
+			  		  
 			    joli_txt[id_old]  = txtShow;				
 				if ($(this).val()!='')
 			      joli_val[id_old]    = $(this).val();
