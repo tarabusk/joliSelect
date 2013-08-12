@@ -10,7 +10,15 @@
  *
  */
  /*
- *	markup example for $("#combo").joliSelect();
+ TODO list
+ - Rajouter des événements sur le select
+ - Garder les attributs id et name du select d'origine
+ - Améliorer le rendu de la surimpression de l'élément sélectionné dans la liste
+ - Rendre paramétrable l'animation d'ouverture de la liste
+ - Rendre paramétrable le nombre d'items affichés sans scroll plutôt que la hauteur max sans scroll
+ .*
+ /*
+ *	 example for $("#combo").joliSelect();
  *	
  * 	<div id="combo">
        <form method="GET" action="page.html">
@@ -42,7 +50,8 @@
 		'maxHeight'     : '260',     // Max height of the list
 		'tailleFleche'  : '6',
 		'defaultText'   : 'Choose',   // Text if no selected item
-		'separateur'    : '**'
+		'separateur'    : '**',
+		'onChooseItem'       : null
             };  
             
             var parametres    = $.extend(defauts, options);			
@@ -180,7 +189,11 @@
 			  objet_joli_val.val(joli_val[nom_base]);
 			  objet_combo.hide('fast');
 			  $("#combo"+nom_base+" li").removeClass("item_sel");          		  
-			  $('input[type=hidden][class=hidden'+nom_base+'][value='+joli_val[nom_base]+']').parent('li').addClass("item_sel");	
+			  $('input[type=hidden][class=hidden'+nom_base+'][value='+joli_val[nom_base]+']').parent('li').addClass("item_sel");
+              if(parametres.onChooseItem)
+			  {
+				parametres.onChooseItem($(this));
+			  } 			  
               //e.stopPropagation(); 	//Viré car pose problème avec l'autocomplétion, ne valide pas le choix. Pb à résoudre !		  
 			}
 			
