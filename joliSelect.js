@@ -53,11 +53,11 @@
 		'onChooseItem'       : null
             };  
             
-            var parametres    = $.extend(defauts, options);			
-            
+            var parametres    = $.extend(defauts, options);			         
             return this.each(function()
         {     
             var element         = $(this);	
+			element.hide();
             var id_old          = element.attr('id');			
             if (element.attr('name')!= 'undefined'){
 			  var name_old          =id_old;	
@@ -194,12 +194,14 @@
 			  objet_combo.hide('fast');
 			  objet_joli_txt.val(joli_txt[id_old]);			 
 			  if (objet_joli_val.val() != joli_val[id_old]){			  
-				  if (parametres.onChooseItem){
-					parametres.onChooseItem($(this));
-				  }			  
+				  		  
 				  objet_joli_txt.val(joli_txt[id_old]);
 				  objet_joli_txt.attr('title',joli_txt[id_old]);			  
 				  objet_joli_val.val(joli_val[id_old]);
+				  
+				  if (parametres.onChooseItem){
+					parametres.onChooseItem($(this));
+				  }	
 				  
 				  $("#combo_"+id_old+" li").removeClass("item_sel");          		  
 				  $('input[type=hidden][class=hidden_'+id_old+'][value='+joli_val[id_old]+']').parent('li').addClass("item_sel");
