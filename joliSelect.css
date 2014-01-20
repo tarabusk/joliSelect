@@ -1,5 +1,5 @@
 .joliSelect{
-display:inline-block;
+display:inline-block;cursor:pointer;
 }
 .item_sel{
 font-weight:bold !important;
@@ -8,8 +8,7 @@ font-weight:bold !important;
 display: inline-block;
 width:0px;
 height:0px;
-vertical-align: top;
-position:absolute;
+margin-left:-15px;
 
 }
 .joliSelect li{

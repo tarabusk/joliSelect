@@ -34,11 +34,27 @@
 (function($)
 { 
     
-    $.fn.joliSelect=function(options)
+    $.fn.joliSelect=function(options,obj)
     {     
+	    switch (options) {
+		  case 'selected':
+				var $obj;
+				$(this).each(function() {
+					$obj=$(this);
+					if (!$obj.hasClass('joliSelect')) {
+					//	$.fn.joliSelect.debug('Seul les éléments joliSelect sont accepté pour la méthode disable : '+this);
+					} else {
+						//if ($obj.children('.mOptions').children('.mCurrent').size()!=0) $obj.children('.mOptions').children('.mCurrent').removeClass('mCurrent').children('.mRadio')[0].checked=false;
+						//$obj.children('.mSelected').html($obj.children('.mOptions').children('.mOption').eq(obj).html()).children('.mRadio').remove();
+						//$obj.children('.mOptions').children('.mOption').eq(obj).addClass('mCurrent').children('.mRadio')[0].checked=true;
+					}
+				});
+			break;
+			default:
+			
 	    // if ($.browser.msie && (parseInt($.browser.version) < 7))  exit;
             //On définit nos paramètres par défaut
-            var defauts=
+        var defauts=
             {      
 		'bkdColor'      :'#e7e9ba',  // BackgroundColor of the joliSelect		
 		'bkdColorSelect':'#e7d2a0',  // BackgroundColor of the selected item 
@@ -46,6 +62,7 @@
 		'fontColor'     : '#555555', //
 		'width'         : '0',       //width of the element if not determined, we take the width of the SELECT element
 		'defaultWidth'  : '200',     // If no width found 
+		'defaultHeight' : '',
 		'maxHeight'     : '260',     // Max height of the list
 		'tailleFleche'  : '6',
 		'defaultText'   : 'Choose',   // Text if no selected item
@@ -53,8 +70,11 @@
 		'onChooseItem'       : null
             };  
             
-            var parametres    = $.extend(defauts, options);			         
-            return this.each(function()
+        var parametres    = $.extend(defauts, options);	
+
+         
+		
+         return this.each(function()
         {     
             var element         = $(this);	
 			element.hide();
@@ -85,8 +105,9 @@
 			  else
 			    var txtShow = tabTxt[0];
 			 
-              var classe_selected='';  			
-			  if ($(this).is(":selected")&& (element.prop("selectedIndex")!=0)){
+              var classe_selected='';   
+			// Tricky here, because if no option is selected, the browser will preselect the first item
+			  if ($(this).is(":selected")&& ($(this).attr("selected")=='selected')){
 			  		  
 			    joli_txt[id_old]  = txtShow;				
 				if ($(this).val()!='')
@@ -153,7 +174,8 @@
                         'width': largeur_combo+'px',	                      		
 						'background': parametres.bkdColor,
                         'border': '1px solid '+parametres.bkdColorSelect,
-                        'color':parametres.fontColor 						
+                        'color':parametres.fontColor,
+                        'height':parametres.defaultHeight 						
                     });
 					
 			objet_combo.css({                   
@@ -186,7 +208,7 @@
 						'borderRight': parametres.tailleFleche+'px solid transparent',
 						'borderTop': parseInt(parametres.tailleFleche)+parseInt(2) +'px solid '+parametres.arrowColor,
 						'borderLeft': parametres.tailleFleche+'px solid transparent',                       
-						'margin': parseInt(objet_joli_txt.css('height')) - parametres.tailleFleche-parseInt(2)+'px 0px 0px '+ fleche_left+'px'
+						//'margin': parseInt(objet_joli_txt.css('height')) - parametres.tailleFleche-parseInt(2)+'px 0px 0px '+ fleche_left+'px'
                     });
 			
 				
@@ -198,11 +220,9 @@
 				  objet_joli_txt.val(joli_txt[id_old]);
 				  objet_joli_txt.attr('title',joli_txt[id_old]);			  
 				  objet_joli_val.val(joli_val[id_old]);
-				  
 				  if (parametres.onChooseItem){
 					parametres.onChooseItem($(this));
 				  }	
-				  
 				  $("#combo_"+id_old+" li").removeClass("item_sel");          		  
 				  $('input[type=hidden][class=hidden_'+id_old+'][value='+joli_val[id_old]+']').parent('li').addClass("item_sel");
               }			  
@@ -252,7 +272,10 @@
                 objet_combo.show('fast');
 				objet_joli_txt.val('');
             });
-		
+		    obj_combo_fleche.click(function() {	
+                objet_combo.show('fast');
+				objet_joli_txt.val('');
+            });
 			
 			objet_combo.click(function(e) {			
                 closeCombo(e);
@@ -267,6 +290,7 @@
                 if (! $clicked.parents().hasClass("dropdown"))
                     $(".dropdown dd ul").hide();
             });
-        });                        
+        });    
+     } // switch		
     };
 })(jQuery);
