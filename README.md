@@ -1,12 +1,13 @@
 joliSelect
 ==========
+Drop Down jQuery Plugin
 
-NICE JQUERY SELECTBOX/DROP-DOWN PLUGINS
 =========
 
-Exemple here : http://memo-web.fr/categorie-jquery-224.php
+jQuery Plugin for traditional selec/Drop Down HTML element
 
-This is a jQuery SelectBox/Drop Down Plugin
+Exemple here : http://memo-web.fr/categorie-jquery-224.php or in the index.php included file
+
 
 The jQuery joliSelect Plugin allows to skin your HTML Select element.
 
