@@ -9,7 +9,12 @@ display: inline-block;
 width:0px;
 height:0px;
 margin-left:-15px;
+/*vertical-align: top;*/
+/*position:absolute;*/
 
+}
+.joliSelect ul{
+overflow-y:scroll;
 }
 .joliSelect li{
 transition: background-color 0.4s;

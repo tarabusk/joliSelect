@@ -19,7 +19,7 @@
  /*
  *	 example for $("#combo").joliSelect();
  *	
- * 	<div id="combo">
+ * 	<div class="combo">
        <form method="GET" action="page.html">
          <select id="combo">
           <option value="" selected></option>
@@ -63,10 +63,12 @@
 		'width'         : '0',       //width of the element if not determined, we take the width of the SELECT element
 		'defaultWidth'  : '200',     // If no width found 
 		'defaultHeight' : '',
-		'maxHeight'     : '260',     // Max height of the list
+		'maxHeight'     : '300',     // Max height of the list
 		'tailleFleche'  : '6',
-		'defaultText'   : 'Choose',   // Text if no selected item
+		'defaultText'   : 'Choose',  // Text if no selected item
 		'separateur'    : '**',
+		'autocomplete'  : true,
+		'fontfamilyselect':false,    // Add a font-family to any of each item
 		'onChooseItem'       : null
             };  
             
@@ -78,7 +80,7 @@
         {     
             var element         = $(this);	
 			element.hide();
-            var id_old          = element.attr('id');			
+            var id_old          = element.attr('id');				
             if (element.attr('name')!= 'undefined'){
 			  var name_old          =id_old;	
 			}else{
@@ -104,19 +106,29 @@
 			    var txtShow = tabTxt[1];
 			  else
 			    var txtShow = tabTxt[0];
-			 
-              var classe_selected='';   
+			  if ($(this).attr('class')=="undefined"){
+                var LClass=$(this).attr('class');}
+              else{
+  			     var LClass="";}
+				 
+			  if ($(this).attr('style')!="undefined"){
+                var LStyle=$(this).attr('style');}
+              else{
+  			     var LStyle="";}
 			// Tricky here, because if no option is selected, the browser will preselect the first item
-			  if ($(this).is(":selected")&& ($(this).attr("selected")=='selected')){
-			  		  
+			  if ($(this).is(":selected")&& ($(this).attr("selected")=='selected')){			  		
 			    joli_txt[id_old]  = txtShow;				
 				if ($(this).val()!='')
 			      joli_val[id_old]    = $(this).val();
 				else
 				  joli_val[id_old]    = txtShow;
-				classe_selected  = 'item_sel';
+				LClass  = LClass+' item_sel';
+				if (parametres.fontfamilyselect){ 
+				  LFontFamily = $(this).attr('value');
+				}else{LFontFamily = '';}
 			  }
-			  html += '<li class="'+classe_selected+'">'+txtItem;
+			  
+			  html += '<li style="'+LStyle+'" class="'+LClass+'">'+txtItem;
 			  html += '<input type="hidden" class="hidden_'+id_old+'" value="'+$(this).val()+'" />';
 			  html += '<input type="hidden" class="txtS_'+id_old+'" value="'+txtShow+'" />';
 			  html += ' </li>';	
@@ -139,7 +151,7 @@
 			
 			element.remove();
 			
-			var objet_joli_txt=$( "<input type='text' autocomplete='off' class='joli_txt' name='joli_txt_"+id_old+"' id='joli_txt_"+id_old+"' />" );
+			var objet_joli_txt=$( "<input type='text' autocomplete='off'  class='joli_txt' name='joli_txt_"+id_old+"' id='joli_txt_"+id_old+"' />" );
 			objet_conteneur.append (objet_joli_txt);		
 			
 			var obj_combo_fleche = $( "<b id='combo_fleche_"+id_old+"' class='combo_fleche'> </b>" );
@@ -175,9 +187,11 @@
 						'background': parametres.bkdColor,
                         'border': '1px solid '+parametres.bkdColorSelect,
                         'color':parametres.fontColor,
-                        'height':parametres.defaultHeight 						
+                        'height':parametres.defaultHeight,
+						'font-family':LFontFamily						
                     });
 					
+			//if (parametres.defaultHeight!=""){loverflowY='scroll';}else{loverflowY='';}
 			objet_combo.css({                   
 					    'width': parseInt(objet_joli_txt.css('width')) + + parseInt(objet_joli_txt.css('paddingRight'))+'px',
 					/*	'left':objet_joli_txt.position().left,*/
@@ -187,7 +201,7 @@
 						'maxHeight': parametres.maxHeight+'px',
 						'display':'none',
 						'color': parametres.fontColor,
-						'overflowY':'scroll',				  
+						//'overflowY':loverflowY,				  
 				        'position':'absolute',
 						'listStyle':'none',
 				        'zIndex':'2', 
@@ -208,7 +222,7 @@
 						'borderRight': parametres.tailleFleche+'px solid transparent',
 						'borderTop': parseInt(parametres.tailleFleche)+parseInt(2) +'px solid '+parametres.arrowColor,
 						'borderLeft': parametres.tailleFleche+'px solid transparent',                       
-						//'margin': parseInt(objet_joli_txt.css('height')) - parametres.tailleFleche-parseInt(2)+'px 0px 0px '+ fleche_left+'px'
+					//	'margin': parseInt(objet_joli_txt.css('height')) - parametres.tailleFleche-parseInt(8)+'px 0px 0px '+ fleche_left+'px'
                     });
 			
 				
@@ -218,10 +232,16 @@
 			  if (objet_joli_val.val() != joli_val[id_old]){			  
 				  		  
 				  objet_joli_txt.val(joli_txt[id_old]);
-				  objet_joli_txt.attr('title',joli_txt[id_old]);			  
+				  objet_joli_txt.attr('title',joli_txt[id_old]);
+				  if (parametres.fontfamilyselect){ 
+				    objet_joli_txt.css({'font-family':joli_val[id_old]});	
+                   }   
 				  objet_joli_val.val(joli_val[id_old]);
+				  
+                    
 				  if (parametres.onChooseItem){
 					parametres.onChooseItem($(this));
+					
 				  }	
 				  $("#combo_"+id_old+" li").removeClass("item_sel");          		  
 				  $('input[type=hidden][class=hidden_'+id_old+'][value='+joli_val[id_old]+']').parent('li').addClass("item_sel");
@@ -238,21 +258,24 @@
 			  }
 			});
 			
-			objet_joli_txt.autocomplete({ 
-			  source: availableTags,
-			  minLength: 1,
-			  select: function(event, ui)
-						{		                        					
-                         joli_txt[id_old] = ui.item.labelS;	
-                         joli_val[id_old]   = ui.item.id;	
-						 return false;                        						 
-						},
-			  
-			  close: function(event, ui)
-						{							 					 
-						} 				   
-		    });
-			
+			if(parametres.autocomplete){
+				objet_joli_txt.autocomplete({ 
+				  source: availableTags,
+				  minLength: 1,
+				  select: function(event, ui)
+							{		                        					
+							 joli_txt[id_old] = ui.item.labelS;	
+							 joli_val[id_old]   = ui.item.id;	
+							 return false;                        						 
+							},
+				  
+				  close: function(event, ui)
+							{							 					 
+							} 				   
+				});
+			}
+			//id_old_format= id_old.replace(/[[]/g,'\\\\[');		
+			//id_old_format= id_old_format.replace(/]/g,'\\\\]');
 			$("#combo_"+id_old+" li").hover(
 			  function () {
 				$(this).css({'background': parametres.bkdColorSelect});
@@ -292,5 +315,7 @@
             });
         });    
      } // switch		
+	 
+	 
     };
 })(jQuery);
