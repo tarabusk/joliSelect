@@ -43,7 +43,7 @@
 		<span class="opt">'bkdColorSelect'</span>:'#e7d2a0',  <span class="opt_comment"> BackgroundColor of the selected item </span><br>
         <span class="opt">'arrowColor'</span>    : '#e7d2a0', <span class="opt_comment"> Color of the arrow		</span><br>
 		<span class="opt">'fontColor'</span>     : '#555555', <span class="opt_comment"></span><br>
-		<span class="opt">'width'</span>         : '0',       <span class="opt_comment">width of the element if not determined, we take the width of the SELECT element</span><br>
+		<span class="opt">'width'</span>         : '0',       <span class="opt_comment">Width of the element if not determined, we take the width of the SELECT element</span><br>
 		<span class="opt">'defaultWidth'</span>  : '200',     <span class="opt_comment"> If no width found </span><br>
 		<span class="opt">'defaultHeight'</span> : '',        <span class="opt_comment"></span><br>
 		<span class="opt">'maxHeight'</span>     : '300',     <span class="opt_comment"> Max height of the list</span><br>
@@ -86,7 +86,7 @@
 			</fieldset>
 			
 			<fieldset>
-			<legend>  Exemple 2 : Add a different when the item is in the list and when it is selected </legend>
+			<legend>  Exemple 2 : Different text when item in the list and when selected </legend>
 				<select id="combo_fruit" >				 
 				  <option value="2" selected="selected">Banane**Banane (Banana)</option>
 				  <option value="3">Pomme**Pomme (Apple)</option>
